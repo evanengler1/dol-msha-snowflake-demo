@@ -11,7 +11,6 @@ An end-to-end Snowflake demo built on public Mine Safety and Health Administrati
 ## About the data (read this first)
 
 - **Portal data only.** Everything comes from the DOL Open Data Portal. Nothing is synthetic.
-- **No methane, temperature or sensor readings.** The portal does not publish them. Every "methane" or "ventilation" figure in this demo is a **compliance proxy**: the count of citations issued under 30 CFR 75 Subpart D (75.300-75.390). Other hazard categories are proxies in the same way (rock dust, roof and rib, electrical, respirable dust). The dashboard, app and agent all say this.
 - **Rates** are pooled per 200,000 operator hours: `SUM(operator injuries) * 200000 / SUM(operator hours)`. Per-mine rates are never averaged.
 - **Coverage** is 2010 to 2026 Q2. **2026 is a partial year** and is left out of year-over-year comparisons.
 - **The early-warning tier** (Elevated, Watch, Typical) is an illustrative signal built from public citations and injuries. It is not an official MSHA rating and not a prediction for any mine.
@@ -101,6 +100,8 @@ Nothing in this repo is tied to a particular account except these placeholders:
 Object names (`DOL_MSHA_DEMO`, `DOL_MSHA_WH`, `DOL_MSHA_DEMO_ROLE`) can stay as they are. If you rename them, search the whole repo: the SQL, `streamlit/snowflake.yml`, `react-app/app.yml` and the app's queries all use them.
 
 ### Step 1: Get the data into RAW
+
+> **Already have MSHA data in Snowflake?** Skip the download and file-loading steps (Options B and C). Run `01_setup.sql` and `02_raw_tables.sql`, then Option A to map your existing tables into RAW, and go straight to Step 2.
 
 Every later step reads only the 14 `RAW.MSHA_*` tables, so pick whichever source suits you. Start with:
 
@@ -219,25 +220,6 @@ Then open [https://ai.snowflake.com](https://ai.snowflake.com) and pick **MSHA M
 SELECT SNOWFLAKE.CORTEX.DATA_AGENT_RUN('DOL_MSHA_DEMO.APPS.MSHA_SAFETY_AGENT',
   $${"messages":[{"role":"user","content":[{"type":"text","text":"How many 104(d)/107(a) actions were issued in West Virginia in 2025?"}]}],"stream":false}$$);
 ```
-
-## Demo walkthrough (about 20 minutes)
-
-1. **Dashboard, Overview (5 min).** National injury rates for coal and metal/nonmetal since 2010. Point out pooled rates and the partial-2026 marker.
-2. **Dashboard, Ventilation and Methane Proxy (3 min).** Answer the original ask head-on: the portal has no sensor data, so here is what citations under 30 CFR 75 Subpart D show instead.
-3. **Dashboard, Leading Indicators (3 min).** Which signals in one quarter are followed by more injuries in the next, and which are not.
-4. **App (5 min).** Search a mine (for example `0100851`, Oak Grove Mine), walk the briefing and early-warning card, then open the District C04 watch list and compare three mines.
-5. **Agent in CoWork (4 min).** Ask two or three sample questions, then close with "What were methane levels at Oak Grove Mine last month?" to show it explains the data gap and offers the proxy.
-
-Agent sample questions:
-
-- Which coal mines in District C04 had the most ventilation citations last year?
-- What is the coal operator injury rate by year since 2015?
-- Which Elevated mines are in Kentucky?
-- Top 10 operators by fatalities since 2020
-- How many 104(d)/107(a) actions were issued in West Virginia in 2025?
-- Compare injury rates for underground vs surface coal mines
-- Find roof-fall accidents involving continuous miners
-- Show fatal accidents involving powered haulage in 2025
 
 ## Cost
 
