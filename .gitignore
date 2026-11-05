@@ -1,6 +1,7 @@
 # Portal downloads and processed extracts (multi-GB; reproduce with process_msha_data.py)
 data/*
 !data/manifest.json
+!data/README.md
 output/
 
 # Credentials
