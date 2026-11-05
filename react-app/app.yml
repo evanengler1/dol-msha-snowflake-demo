@@ -1,0 +1,36 @@
+version: 2
+
+name: MSHA_EARLY_WARNING_APP
+database: DOL_MSHA_DEMO
+schema: APPS
+query_warehouse: DOL_MSHA_WH
+
+label: "MSHA Mine Early-Warning"
+description: "Per-mine safety briefings, an illustrative early-warning tier, district watch lists and comparisons from public MSHA data. Read-only."
+icon: public/icon.svg
+
+ignore:
+  - node_modules
+  - .env*
+  - __pycache__
+  - "*.pyc"
+  - .next
+  - .git
+  - snowflake.log
+  - "*.tsbuildinfo"
+  - app.yml.builder
+
+install:
+  commands:
+    - ["npm", "ci", "--include=dev"]
+
+build:
+  commands:
+    - ["npm", "run", "build"]
+    # Standalone mode: copy static assets in, then drop the full node_modules
+    - ["cp", "-r", ".next/static", ".next/standalone/.next/static"]
+    - ["cp", "-r", "public", ".next/standalone/public"]
+    - ["rm", "-rf", "node_modules"]
+
+run:
+  command: ["node", ".next/standalone/server.js"]

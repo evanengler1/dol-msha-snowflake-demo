@@ -1,0 +1,26 @@
+definition_version: 2
+entities:
+  msha_safety_dashboard:
+    type: streamlit
+    identifier:
+      name: MSHA_SAFETY_DASHBOARD
+      database: DOL_MSHA_DEMO
+      schema: APPS
+    title: "DOL MSHA Mine Safety Analytics"
+    query_warehouse: DOL_MSHA_WH
+    runtime_name: SYSTEM$ST_CONTAINER_RUNTIME_PY3_11
+    compute_pool: SYSTEM_COMPUTE_POOL_CPU
+    external_access_integrations:
+      # Replace with your account's PyPI external access integration (see sql/09_streamlit_setup.sql)
+      - PYPI_ACCESS_INTEGRATION
+    main_file: Overview.py
+    pages_dir: pages
+    artifacts:
+      - Overview.py
+      - utils.py
+      - pyproject.toml
+      - .streamlit/config.toml
+      - assets/us-states.json
+      - pages/1_Ventilation_Methane_Proxy.py
+      - pages/2_Leading_Indicators.py
+      - pages/3_Map_and_Operators.py

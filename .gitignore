@@ -1,0 +1,30 @@
+# Portal downloads and processed extracts (multi-GB; reproduce with process_msha_data.py)
+data/*
+!data/manifest.json
+output/
+
+# Credentials
+.env
+.env*
+**/.streamlit/secrets.toml
+!**/*.example
+*.p8
+snowflake.log
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
+# Streamlit build output
+streamlit/output/
+
+# Node / Next.js
+react-app/node_modules/
+react-app/.next/
+react-app/*.tsbuildinfo
+react-app/app.yml.builder
+
+# OS / editor
+.DS_Store
+.snowflake/
