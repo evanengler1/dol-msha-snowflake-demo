@@ -210,6 +210,18 @@ Users also need `USAGE` on the CoWork object and a role that can use the agent, 
 
 Then open [https://ai.snowflake.com](https://ai.snowflake.com) and pick **MSHA Mine Safety Agent**.
 
+Sample questions to try:
+
+- Which coal mines in District C04 had the most ventilation citations last year?
+- What is the coal operator injury rate by year since 2015?
+- Which Elevated mines are in Kentucky?
+- Top 10 operators by fatalities since 2020
+- How many 104(d)/107(a) actions were issued in West Virginia in 2025?
+- Compare injury rates for underground vs surface coal mines
+- Find roof-fall accidents involving continuous miners
+- Show fatal accidents involving powered haulage in 2025
+- What were methane levels at Oak Grove Mine last month? (the agent explains the data gap and offers the citation proxy)
+
 ### Step 6: Check it works
 
 - **Dashboard:** the Overview page shows national trends from 2010 to 2026, with 2026 marked partial.
