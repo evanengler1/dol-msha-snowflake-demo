@@ -19,19 +19,23 @@ An end-to-end Snowflake demo built on public Mine Safety and Health Administrati
 
 ## Architecture
 
-```
-MSHA data (choose one) ─────────────────────────────────────────────┐
-  A. MSHA tables already in your account ── LOAD_RAW_FROM_TABLE ─────┤
-  B. data.dol.gov ZIPs ── process_msha_data.py ── stage ── COPY INTO ─┤
-  C. DOL Open Data API ── your extract ── stage ── COPY INTO ─────────┤
-                                                                      │
-   RAW (14 VARCHAR tables) ──> TRANSFORMED (typed tables, MINE_QUARTER_FACT) ──> ANALYTICS
-                                                                                          │
-      views + Dynamic Tables (trends, leading indicators, early-warning tier, mine directory)
-            │                         │                                  │
-   Streamlit dashboard        App Runtime app                 Semantic view + Cortex Search
-                                                                         │
-                                                              Cortex Agent in CoWork
+```mermaid
+flowchart TD
+    subgraph SRC["MSHA data (choose one)"]
+        A["A. MSHA tables already<br/>in your account"]
+        B["B. data.dol.gov ZIPs"]
+        C["C. DOL Open Data API"]
+    end
+    A -- "LOAD_RAW_FROM_TABLE" --> RAW
+    B -- "process_msha_data.py" --> STG["Stage<br/>(internal or S3)"]
+    C -- "your extract" --> STG
+    STG -- "COPY INTO" --> RAW["RAW<br/>14 VARCHAR tables"]
+    RAW --> TR["TRANSFORMED<br/>typed tables, MINE_QUARTER_FACT"]
+    TR --> AN["ANALYTICS<br/>views + Dynamic Tables<br/>trends, leading indicators,<br/>early-warning tier, mine directory"]
+    AN --> ST["Streamlit dashboard"]
+    AN --> APP["App Runtime app"]
+    AN --> SV["Semantic view +<br/>Cortex Search"]
+    SV --> AG["Cortex Agent<br/>in CoWork"]
 ```
 
 | Schema | Contents |
