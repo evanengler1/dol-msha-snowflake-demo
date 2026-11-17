@@ -88,7 +88,7 @@ export default function WatchList() {
       <PageHeader
         eyebrow="District watch list"
         title="Which mines should we visit first?"
-        sub="Mines with at least 20,000 operator hours in the last 4 quarters, ranked by early-warning tier, then the number of validated signals in the Highest group, then prior injury rate."
+        sub="Mines with at least 20,000 operator hours in the last 4 quarters, ranked by early-warning tier, then the number of screened signals in the Highest group, then prior injury rate."
       />
       <div className="card mb-4 flex flex-wrap items-end gap-4 p-4">
         {lists.error ? (

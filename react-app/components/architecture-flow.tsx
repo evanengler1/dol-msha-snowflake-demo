@@ -171,7 +171,7 @@ export const NODES: N[] = [
     title: "LEADING_INDICATORS",
     sub: "Prior 4Q vs next quarter",
     what: "Each mine-quarter's trailing signals next to the following quarter's injuries, grouped into None plus quartiles within mine category.",
-    why: "It proves which signals come first. For coal, four rise steadily from None to Highest; S&S share and inspection intensity do not.",
+    why: "It shows which past signals are associated with next-quarter injuries. For coal, four rise steadily from None to Highest; S&S share and inspection intensity do not. Associations only, not causal or tested out of sample.",
     objects: ["ANALYTICS.LEADING_INDICATORS"],
     stats: [
       { k: "Coal: prior injury rate", text: "1.4 → 7.2 next-quarter injuries per 200K hrs" },
@@ -198,7 +198,7 @@ export const NODES: N[] = [
     col: 3,
     title: "MINE_EARLY_WARNING",
     sub: "Dynamic Table · weekly",
-    what: "One row per mine with recent hours: the four validated signals, their leading-indicator group, the evidence behind each group, an illustrative tier and plain-English reasons.",
+    what: "One row per mine with recent hours: the four screened signals, their leading-indicator group, the evidence behind each group, an illustrative tier and plain-English reasons.",
     why: "The tier lives in SQL so the watch list can rank thousands of mines in milliseconds, and every app reads the same answer.",
     objects: ["ANALYTICS.MINE_EARLY_WARNING", "ANALYTICS.EARLY_WARNING_REFERENCE"],
     stats: [
@@ -252,7 +252,7 @@ export const NODES: N[] = [
     title: "Mine Early-Warning App",
     sub: "Snowflake App Runtime",
     what: "This app: per-mine briefings, the early-warning tier with its evidence, district watch lists and side-by-side comparison. Next.js running inside Snowflake.",
-    why: "Puts the validated indicators in an inspector's hands before a visit, with no data leaving Snowflake.",
+    why: "Puts the screened indicators in an inspector's hands before a visit, with no data leaving Snowflake.",
     objects: ["APPS.MSHA_EARLY_WARNING_APP"],
     stats: [
       { k: "Runtime", text: "Next.js on Snowflake App Runtime (SPCS)" },

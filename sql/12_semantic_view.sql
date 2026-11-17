@@ -10,7 +10,7 @@ CALL SYSTEM$CREATE_SEMANTIC_VIEW_FROM_YAML('DOL_MSHA_DEMO.ANALYTICS', $$
 name: MSHA_SAFETY_SEMANTIC_VIEW
 description: >-
   U.S. Department of Labor, Mine Safety and Health Administration (MSHA) data from the DOL Open Data Portal
-  (data.dol.gov), 2010 to 2026 Q2. Covers mine-quarter injuries, operator hours, citations (violations),
+  (data.dol.gov), 2010 to 2026 (hours and quarterly facts through 2026 Q2; accident records run later). Covers mine-quarter injuries, operator hours, citations (violations),
   104(d) unwarrantable failure actions, 107(a) imminent danger orders, proposed penalties, accidents,
   hazard categories by 30 CFR section, mine attributes, and an illustrative early-warning tier.
   Injury rates are pooled per 200,000 operator hours. 2026 is a partial year (hours through 2026 Q2).
@@ -56,7 +56,7 @@ tables:
       - {name: TOTAL_OPERATOR_INJURIES, expr: SUM(OPERATOR_INJURIES), description: "Operator (mine employee) injuries. Basis for the operator injury rate.", synonyms: [injuries, injury count, number of injuries]}
       - {name: TOTAL_OPERATOR_LOST_TIME_INJURIES, expr: SUM(OPERATOR_LOST_TIME_INJURIES), description: "Operator injuries with days away or restricted activity.", synonyms: [lost time injuries, lost-time injuries]}
       - {name: TOTAL_CONTRACTOR_INJURIES, expr: SUM(CONTRACTOR_INJURIES), description: "Contractor employee injuries (not in the operator rate)."}
-      - {name: TOTAL_FATALITIES, expr: SUM(FATALITIES), description: "Fatalities at the mine, operator and contractor employees combined.", synonyms: [deaths, fatal injuries, fatalities]}
+      - {name: TOTAL_FATALITIES, expr: SUM(FATALITIES), description: "Reported fatalities at the mine (30 CFR Part 50 accident reports), operator and contractor employees combined. Can differ slightly from MSHA official chargeable fatality counts.", synonyms: [deaths, fatal injuries, fatalities]}
       - {name: TOTAL_OPERATOR_DAYS_LOST, expr: SUM(OPERATOR_DAYS_LOST), description: "Days away from work for operator injuries."}
       - {name: TOTAL_IGNITION_EXPLOSION_FIRE_ACCIDENTS, expr: SUM(IGNITION_EXPLOSION_FIRE_ACCIDENTS), description: "Accidents classified as ignition or explosion of gas or dust, or mine fire. Accident counts, not gas readings.", synonyms: [ignitions, explosions, mine fires]}
       - {name: TOTAL_OPERATOR_HOURS, expr: SUM(OPERATOR_HOURS_WORKED), description: "Operator employee hours worked. Denominator for operator rates.", synonyms: [hours worked, employee hours, exposure hours]}
@@ -123,7 +123,7 @@ tables:
       - {name: TOTAL_TIERED_MINES, expr: COUNT(MINE_ID), description: "Mines with an early-warning tier.", synonyms: [tiered mines]}
 
   - name: ACCIDENTS
-    description: "One row per reported accident or injury document (2010 to 2026). Accident classification, degree of injury, occupation, equipment, activity. Narratives are searched with the Cortex Search tool, not here. Never sum persons injured in event."
+    description: "One row per reported accident or injury document (2010 to 2026; for 2026 includes reports after Q2, beyond the hours data). Accident classification, degree of injury, occupation, equipment, activity. Narratives are searched with the Cortex Search tool, not here. Never sum persons injured in event."
     base_table: {database: DOL_MSHA_DEMO, schema: ANALYTICS, table: ACCIDENT_DETAIL}
     primary_key: {columns: [ACCIDENT_DOCUMENT_NUMBER]}
     dimensions:

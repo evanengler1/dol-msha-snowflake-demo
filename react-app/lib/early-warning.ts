@@ -119,12 +119,12 @@ export const TIER_STYLE: Record<Tier, { chip: string; dot: string; blurb: string
   Watch: {
     chip: "bg-[#eef3fa] text-navy border-[#d9e3f2]",
     dot: "bg-navy",
-    blurb: "At least one validated signal is in the upper half.",
+    blurb: "At least one screened signal is in the upper half.",
   },
   Typical: {
     chip: "bg-teal-50 text-teal border-[#cfe9e7]",
     dot: "bg-teal",
-    blurb: "No validated signal in the upper half.",
+    blurb: "No screened signal in the upper half.",
   },
   "Not enough recent hours": {
     chip: "bg-muted text-muted-foreground border-hair",

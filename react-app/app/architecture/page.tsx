@@ -25,7 +25,7 @@ const VIEWS: [string, string][] = [
   ["MINE_PROFILE", "One row per mine: last-4-quarter indicators, peer group, peer percentiles and trends."],
   ["OPERATOR_PORTFOLIO", "Current operators with their mines, recent rates, fatalities and open balances."],
   ["PENALTY_OUTCOMES", "Proposed vs assessed vs paid penalties by status."],
-  ["MINE_EARLY_WARNING", "Dynamic Table: four validated signals, their groups, evidence, an illustrative tier and reasons."],
+  ["MINE_EARLY_WARNING", "Dynamic Table: four screened signals, their groups, evidence, an illustrative tier and reasons."],
 ]
 
 const APPS = [
@@ -110,7 +110,7 @@ export default function Architecture() {
       <PageHeader
         eyebrow="Architecture"
         title="One platform, from public portal to three apps."
-        sub="Public MSHA data lands in Snowflake, becomes typed tables, validated indicators and a semantic layer, and feeds a dashboard, this app and a CoWork agent. Nothing leaves Snowflake."
+        sub="Public MSHA data lands in Snowflake, becomes typed tables, screened indicators and a semantic layer, and feeds a dashboard, this app and a CoWork agent. Nothing leaves Snowflake."
       />
 
       <motion.div {...reveal} className="card mb-6 border-l-4 border-l-teal p-5">

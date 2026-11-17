@@ -12,10 +12,11 @@ An end-to-end Snowflake demo built on public Mine Safety and Health Administrati
 
 - **Portal data only.** Everything comes from the DOL Open Data Portal. Nothing is synthetic.
 - **Rates** are pooled per 200,000 operator hours: `SUM(operator injuries) * 200000 / SUM(operator hours)`. Per-mine rates are never averaged.
-- **Coverage** is 2010 to 2026 Q2. **2026 is a partial year** and is left out of year-over-year comparisons.
-- **The early-warning tier** (Elevated, Watch, Typical) is an illustrative signal built from public citations and injuries. It is not an official MSHA rating and not a prediction for any mine.
+- **Coverage** is 2010 to 2026. Hours, rates and the mine-quarter facts run through 2026 Q2; accident records run later (to late October 2026 in this snapshot). **2026 is a partial year** and is left out of year-over-year comparisons.
+- **Injury rates are operator-employee rates** on every surface. MSHA's published headline rate includes contractors and is somewhat lower (for example 1.73 vs 1.88 for 2025).
+- **The early-warning tier** (Elevated, Watch, Typical) is an illustrative signal built from public citations and injuries. Its signals were screened on in-sample associations with next-quarter injuries; they are not causal and were not tested out of sample. It is not an official MSHA rating and not a prediction for any mine.
 - **Accident narratives** are truncated at 384 characters by the portal.
-- **Fatality counts** include operator and contractor employees. Mine history is attributed to the mine's current operator.
+- **Fatality counts** are reported fatal accidents (30 CFR Part 50 reports) for operator and contractor employees. The portal has no chargeability flag, so counts can differ slightly from MSHA's official chargeable fatality statistics. Mine history is attributed to the mine's current operator.
 
 ## Architecture
 

@@ -144,13 +144,14 @@ with h2:
         if k == "ss_per_hours" and category == "Metal/Nonmetal":
             why += "; small mines inflate per-hour ratios"
         items.append(f"<li><b>{lbl}</b>: {why}</li>")
-    items.append("<li><b>Inspection intensity</b>: MSHA sends more inspectors to mines it already sees as risky, "
-                 "so more inspection follows risk rather than predicting it</li>")
+    items.append("<li><b>Inspection intensity</b>: likely reflects MSHA targeting mines it already sees as risky, "
+                 "so it can't be read as an independent warning sign</li>")
     st.markdown(f"<div class='verdict-bad'><b style='color:#475569'>✗ Signals that don't hold up</b>"
                 f"<div class='verdict-sub'>Weak, uneven, or explained by something else</div>"
                 f"<ul>{''.join(items)}</ul></div>", unsafe_allow_html=True)
 st.caption("Test used: a sign 'holds up' when the Highest group is at least 2× the None group and injuries rise at "
-           "every step from Low to Highest. These are associations across many mines, not a prediction for any one mine.")
+           "every step from Low to Highest. These are in-sample associations across many mines, not causal or tested out of sample, "
+           "and not a prediction for any one mine. Verdicts can change with the measure selected.")
 
 st.divider()
 st.markdown("### The evidence, one warning sign at a time")
@@ -173,7 +174,7 @@ for i, (k, (label, _, kind, desc)) in enumerate(INDICATORS.items()):
                 st.caption(f"Too few {category.lower()} mines have any of this to form groups.")
             elif kind == "confounded":
                 q1 = g.set_index("quartile")[ycol].get(1)
-                st.caption(f"Low {fmt(q1)} → Highest {fmt(v['q4'])}, but inspectors are sent to riskier mines.")
+                st.caption(f"Low {fmt(q1)} → Highest {fmt(v['q4'])}, likely reflecting MSHA targeting of riskier mines.")
             else:
                 st.caption(f"None {fmt(v['q0'])} → Highest {fmt(v['q4'])} ({v['lift']:.1f}× higher)")
             g["group"] = g.quartile.map(lambda q: GROUP_LABELS.get(int(q), str(q)))

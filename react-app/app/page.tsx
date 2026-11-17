@@ -120,7 +120,7 @@ export default function Landing() {
             format={fmt.int}
             tone="alert"
             source="ANALYTICS.MINE_EARLY_WARNING"
-            note="Illustrative early-warning tier from the four validated leading indicators."
+            note="Illustrative early-warning tier from four screened signals (in-sample associations, not a prediction)."
             sub={<Link href="/watchlist" className="hover:text-foreground">Open the watch list →</Link>}
           />
           <Kpi
@@ -201,7 +201,7 @@ export default function Landing() {
           <p className="text-[13.5px] leading-relaxed">
             DOL asked for trends using metrics such as methane levels and temperature. The DOL Open Data Portal has no methane,
             temperature or sensor readings. This app uses what the portal does have: citations under the ventilation and methane
-            sections of 30 CFR 75 Subpart D, serious enforcement actions and injury history, each validated against the next
+            sections of 30 CFR 75 Subpart D, serious enforcement actions and injury history, each compared with the next
             quarter&apos;s injuries.
           </p>
           <ProxyNote className="mt-2" />

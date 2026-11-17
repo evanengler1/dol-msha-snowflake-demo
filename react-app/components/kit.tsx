@@ -179,7 +179,7 @@ export function GroupChip({ group, label, validated = true }: { group: number | 
         <span>
           {label && <b>{label}: </b>}
           {GROUP_LABEL[g]} group{g === 0 ? " (signal was zero)" : ` (quartile ${g} of mines with any)`}.
-          {!validated && " Not validated for metal/nonmetal; corroborating only."}
+          {!validated && " Not screened in for metal/nonmetal; corroborating only."}
         </span>
       }
     >

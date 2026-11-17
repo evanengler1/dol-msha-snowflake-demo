@@ -10,7 +10,8 @@ from utils import (AMBER, CATEGORY_COLORS, DB, NAVY, PARTIAL_NOTE, PARTIAL_YEAR,
 apply_theme()
 
 st.title("Where are miners getting hurt?")
-st.caption("Accident and enforcement trends across all U.S. mines, 2010 to 2026, from the DOL Open Data Portal.")
+st.caption("Accident and enforcement trends across all U.S. mines, 2010 to 2026, from the DOL Open Data Portal. "
+           "Hours and rates run through 2026 Q2; accident reports run later.")
 
 nat = run_query(f"SELECT * FROM {DB}.NATIONAL_TRENDS ORDER BY year")
 allm = nat[nat.mine_category == "All Mines"].set_index("year")
@@ -20,15 +21,15 @@ last = int(full_years.index.max())
 # KPI tiles
 k = st.columns(4)
 with k[0]:
-    r_now, r_2010 = allm.loc[last, "all_workers_injury_rate_per_200k_hours"], allm.loc[2010, "all_workers_injury_rate_per_200k_hours"]
-    st.metric(f"All-workers injury rate, {last}", f"{r_now:.2f}", f"{r_now - r_2010:+.2f} vs 2010 ({r_2010:.2f})",
+    r_now, r_2010 = allm.loc[last, "operator_injury_rate_per_200k_hours"], allm.loc[2010, "operator_injury_rate_per_200k_hours"]
+    st.metric(f"Operator injury rate, {last}", f"{r_now:.2f}", f"{r_now - r_2010:+.2f} vs 2010 ({r_2010:.2f})",
               delta_color="inverse")
-    provenance("NATIONAL_TRENDS · per 200K hours, operator + contractor")
+    provenance("NATIONAL_TRENDS · operator employee injuries per 200K operator hours")
 with k[1]:
     f_now = int(allm.loc[last, "fatalities"])
     st.metric(f"Fatalities, {last}", f"{f_now}", f"{f_now - int(allm.loc[2010, 'fatalities']):+d} vs 2010",
               delta_color="inverse")
-    provenance("NATIONAL_TRENDS · all mines, operator + contractor")
+    provenance("NATIONAL_TRENDS · reported fatal accidents (30 CFR Part 50), operator + contractor; may differ slightly from MSHA chargeable counts")
 with k[2]:
     st.metric(f"Operator hours, {last}", f"{allm.loc[last, 'operator_hours_worked'] / 1e6:,.0f}M",
               f"{allm.loc[last, 'mines_reporting_hours']:,.0f} mines reporting", delta_color="off")
